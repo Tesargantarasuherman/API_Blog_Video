@@ -2,12 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const blogVideoController  = require('../controllers/blogVideoController');
+const blogKomentar  = require('../controllers/blogKomentar');
 
-router.get('/all',blogVideoController.indexBLogVideo);
-router.post('/post',blogVideoController.createBLogVideo);
-router.post('/post/video',blogVideoController.addChildBLogVideo);
-router.get('/post/:postId',blogVideoController.getByIDBLogVideo);
+router.post('/post-komentar',blogKomentar.buatKomentar);
+router.get('/post-komentar/:postId',blogKomentar.ambilKomentar);
+
 
 
 module.exports = router;
