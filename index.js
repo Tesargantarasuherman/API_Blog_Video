@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParsers = require('body-parser')
 
 const blogVideo = require('./src/routes/blogVideo');
+const komentar = require('./src/routes/komentar');
 app.use(bodyParsers.urlencoded({ extended: true }))
 
 app.use(function (req, res, next) {	
@@ -16,6 +17,7 @@ app.use(function (req, res, next) {
 })
 
 app.use('/v1/blog', blogVideo);
+app.use('/v1/komentar', komentar;
 mongoose.connect('mongodb+srv://iamsuherman:67poqfe8i7oyT3UQ@cluster0.tbtsn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true

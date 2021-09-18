@@ -2,11 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Komentar = new Schema({
-    title: {
+    id_blog_video: {
         type: String,
         required: true
     },
-    genre: {
+    id_user: {
+        type: String,
+        required: true
+    },
+    isi_komentar: {
         type: String,
         required: true
     },
