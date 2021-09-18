@@ -1,5 +1,5 @@
 const blogVideo = require("../models/blogVideo");
-const dataVideo = require("../models/dataVideo");
+const DataUser = require("../models/DataUser");
 const Komentar = require("../models/Komentar");
 
 
@@ -23,30 +23,31 @@ exports.buatKomentar = (req, res, next) => {
 }
 
 exports.ambilKomentar = (req, res, next) => {
-    const id = req.params.postId;
+    let id = req.params.postId;
+    let data_komentar = new Object();
+    var data = [];
+    let response_data =[]
 
-    Komentar.find({'id_blog_video':id})
+    Komentar.find({ id_blog_video: id })
         .then(result => {
-            // dataVideo.find({ id_blog_video: id }).then(datavideo => {
-                if (!result) {
-                    const err = new Error('ID Tidak Di Temukan');
-                    error.errorStatus = 404;
-                    throw error;
-                }
-                else {
-                    res.status(200).json({
-                        message: 'Data Komentar Berhasil Di Panggil',
-                        data: {
-                            data:result,
-                            // sub_video:[
-                            //     datavideo
-                            // ]
-                        }
-                    });
-                }
+            result.forEach((res_data) => {
+                DataUser.find({ _id: res_data.id_user }).then((data_user) => {
+                    data_user.forEach(user=>{
+                        data_komentar.nama = user.nama
+                        data_komentar.isi_komentar =res_data.isi_komentar
+
+                    })
+
+                   data.push(data_komentar)
+                    console.log(data)
+                })
             })
 
-        // })
+            res.status(200).json({
+                message: 'Data Komentar Berhasil Di Panggil',
+                data: data
+            });
+        })
         .catch(err => {
             next(err);
         })
