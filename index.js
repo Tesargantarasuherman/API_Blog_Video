@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
 })
 
 app.use('/v1/blog', blogVideo);
-app.use('/v1/komentar', komentar;
+app.use('/v1/komentar', komentar);
 mongoose.connect('mongodb+srv://iamsuherman:67poqfe8i7oyT3UQ@cluster0.tbtsn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
