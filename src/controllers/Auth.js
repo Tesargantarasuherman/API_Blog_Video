@@ -1,4 +1,5 @@
 const DataUser = require("../models/DataUser");
+const bcrypt = require('bcryptjs');
 
 
 exports.register = (req, res, next) => {
@@ -18,13 +19,13 @@ exports.register = (req, res, next) => {
                         });
                     }
                     let UserPost = new DataUser({
-                        name :req.body.name,
+                        nama :req.body.nama,
                         email:req.body.email,
                         password:hashedPass,
                     })
                     UserPost.save().then(result =>{
                         res.status(201).json({
-                            message : 'Create User Success',
+                            message : 'Registrasi Berhasil',
                             data:result
                         });
                         next()
@@ -35,34 +36,4 @@ exports.register = (req, res, next) => {
                 })
             }
     })
-}
-
-exports.ambilKomentar = (req, res, next) => {
-    const id = req.params.postId;
-
-    Komentar.find({'id_blog_video':id})
-        .then(result => {
-            // dataVideo.find({ id_blog_video: id }).then(datavideo => {
-                if (!result) {
-                    const err = new Error('ID Tidak Di Temukan');
-                    error.errorStatus = 404;
-                    throw error;
-                }
-                else {
-                    res.status(200).json({
-                        message: 'Data Komentar Berhasil Di Panggil',
-                        data: {
-                            data:result,
-                            // sub_video:[
-                            //     datavideo
-                            // ]
-                        }
-                    });
-                }
-            })
-
-        // })
-        .catch(err => {
-            next(err);
-        })
 }
