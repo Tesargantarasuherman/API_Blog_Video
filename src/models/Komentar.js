@@ -6,8 +6,8 @@ const Komentar = new Schema({
         type: String,
         required: true
     },
-    id_user: {
-        type: String,
+    data_user: {
+        type: Object,
         required: true
     },
     isi_komentar: {
