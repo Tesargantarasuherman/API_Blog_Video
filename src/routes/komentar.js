@@ -4,7 +4,10 @@ const router = express.Router();
 
 const blogKomentar  = require('../controllers/blogKomentar');
 
-router.post('/post-komentar',blogKomentar.buatKomentar);
+const {authenticate,authRole}    =  require('../controllers/middleware/authenticate')
+
+
+router.post('/post-komentar',authenticate,authRole('user'),blogKomentar.buatKomentar);
 router.get('/post-komentar/:postId',blogKomentar.ambilKomentar);
 
 
