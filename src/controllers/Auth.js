@@ -1,5 +1,6 @@
 const DataUser = require("../models/DataUser");
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 
 
 exports.register = (req, res, next) => {
@@ -36,4 +37,37 @@ exports.register = (req, res, next) => {
                 })
             }
     })
+}
+exports.login = (req,res,next) =>{
+    const email = req.body.email;
+    const password = req.body.password;
+
+    DataUser.findOne({email: email})
+    .then(user=>{
+          if(user){
+            bcrypt.compare(password,user.password,function(err,result){
+                if(err){
+                    res.json({
+                        error : err
+                    });
+                }
+                if(result){
+                   let token = jwt.sign({role:'user'},'secretValue',{expiresIn:'1h'}) 
+                   res.json({
+                       message:'Login Successfull',
+                       data:user,
+                       token
+                   })
+                }else{
+                    res.json({
+                        message:'Password Does no Matched!',
+                    })
+                }
+            })
+          }else{
+            res.json({
+                message : 'User Not Found',
+            });
+          }
+      })
 }

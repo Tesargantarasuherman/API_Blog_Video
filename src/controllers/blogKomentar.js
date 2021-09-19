@@ -24,8 +24,6 @@ exports.buatKomentar = (req, res, next) => {
             next()
         })
     });
-
-
 }
 
 exports.ambilKomentar = (req, res, next) => {
